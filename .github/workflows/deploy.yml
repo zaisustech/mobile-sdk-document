@@ -2,9 +2,7 @@ name: Deploy Docusaurus Site
 
 on:
     push:
-        branches:
-            - main
-            - master
+        branches: [main, master]
     workflow_dispatch:
 
 jobs:
@@ -12,19 +10,21 @@ jobs:
         runs-on: ubuntu-latest
         permissions:
             contents: write
+
         steps:
-            - name: Checkout main repository
+            - name: Checkout source repo (docs source)
               uses: actions/checkout@v4
               with:
                   repository: zaisustech/zaisus-atomic-ui
                   path: main-repo
                   fetch-depth: 0
+                  token: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Setup Node.js
               uses: actions/setup-node@v4
               with:
                   node-version: "20"
-                  cache: "yarn"
+                  cache: yarn
                   cache-dependency-path: main-repo/docs-site/yarn.lock
 
             - name: Install dependencies
@@ -38,9 +38,8 @@ jobs:
                   yarn build
 
             - name: Deploy to GitHub Pages
-              uses: peaceiris/actions-gh-pages@v3
-              if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+              uses: peaceiris/actions-gh-pages@v3.9.3
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_branch: gh-pages
                   publish_dir: ./main-repo/docs-site/build
-                  cname: false
