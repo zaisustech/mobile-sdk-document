@@ -10,8 +10,7 @@ mobile-sdk/
 │   ├── atomic-ui/              # Atomic UI component library (React Native)
 │   └── file-system/            # File system utilities
 ├── apps/
-│   ├── example-atomic-ui/      # Storybook app for atomic-ui (React Native)
-│   ├── example-file-system/    # Example Expo app for file-system
+│   ├── example-app/            # Unified example app (Expo dev client)
 │   └── docs-site/              # Documentation site (Docusaurus)
 └── package.json
 ```
@@ -26,6 +25,10 @@ curl -fsSL https://bun.sh/install | bash
 bun install
 ```
 
+# Note:
+  `some troubleshoot with bun install, for install use yarn rest of cmd use bun`
+
+
 ## Development
 
 ```sh
@@ -34,13 +37,10 @@ bunx nx build @zaisustech/atomic-ui      # Build atomic-ui library
 bunx nx build @zaisustech/file-system    # Build file-system library
 
 # Run applications
-bunx nx start example-atomic-ui          # Start Metro (Expo dev client) for Storybook app
-bunx nx start example-file-system        # Start Expo app
-bunx nx dev docs-site                    # Start Docusaurus docs (use nx serve docs-site if no dev target)
+bunx nx start example-app                # Start Metro (Expo dev client)
+bunx nx ios example-app
 
-# Alternative commands (using root scripts)
-bun run storybook                        # Start example-atomic-ui Metro
-bun run docs:dev                         # Start docs site
+bunx nx dev docs-site                    # Start Docusaurus docs (or: bun run docs:dev)
 
 # View dependency graph
 bunx nx graph
@@ -76,37 +76,23 @@ import { FileManagerContainer } from '@zaisustech/file-system';
 
 ## Apps
 
-### example-atomic-ui
+### example-app
 
-Storybook application showcasing atomic-ui components (Expo dev client + React Native Storybook).
-
-**Run:**
-```sh
-# Terminal 1 – start Metro (dev client)
-bunx nx start example-atomic-ui
-# or: bun run storybook
-
-# Terminal 2 – run on iOS or Android
-bunx nx run example-atomic-ui:ios
-bunx nx run example-atomic-ui:android
-# Physical device: ios:device / android:device
-# Web: bunx nx run example-atomic-ui:web
-```
-
-### example-file-system
-
-Example Expo application demonstrating file-system library usage.
+Unified example application showcasing atomic-ui and file-system with Expo dev client.
 
 **Run:**
 ```sh
-# Terminal 1 – start Metro (Expo)
-bunx nx start example-file-system
-# or: cd apps/example-file-system && bun run start
+# Start Metro bundler
+bunx nx start example-app
 
-# Terminal 2 – run on iOS or Android
-bunx nx run example-file-system:ios
-bunx nx run example-file-system:android
-# Web: bunx nx run example-file-system:web
+# Run on iOS
+bunx nx run example-app:ios
+
+# Run on Android
+bunx nx run example-app:android
+
+# Run on Web
+bunx nx run example-app:web
 ```
 
 ### docs-site
@@ -122,10 +108,9 @@ bun run docs:dev
 
 ## Notes
 
-Both repositories (`atomic-ui` and `file-system`) are configured to work together in the monorepo:
-- All dependencies are hoisted to root `node_modules` for consistency
-- Workspace packages are linked via symlinks
-- Single source of truth for package versions prevents conflicts
+- Dependencies are hoisted to root `node_modules`
+- Workspace packages are linked via `workspace:*`
+- Single source of truth for package versions
 
 ## License
 
