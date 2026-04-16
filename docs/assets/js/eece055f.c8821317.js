@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkdocs_site=globalThis.webpackChunkdocs_site||[]).push([[461],{9631(s){s.exports=JSON.parse('{"blogBasePath":"/mobile-sdk-document/releases","blogTitle":"Releases","authorsListPath":"/mobile-sdk-document/releases/authors"}')}}]);

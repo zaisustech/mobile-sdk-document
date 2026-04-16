@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs_site=self.webpackChunkdocs_site||[]).push([[4821],{1543:e=>{e.exports=JSON.parse('{"metadata":{"permalink":"/mobile-sdk-document/releases","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Release notes and changelog for UI-Kit","blogTitle":"Releases"}}')}}]);

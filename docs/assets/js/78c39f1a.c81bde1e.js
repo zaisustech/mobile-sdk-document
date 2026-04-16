@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs_site=self.webpackChunkdocs_site||[]).push([[9811],{7345:e=>{e.exports=JSON.parse('{"title":"Recent Releases","items":[{"title":"v1.0.0 - Initial Release","permalink":"/mobile-sdk-document/releases/v1-0-0","unlisted":false,"date":"2026-01-20T00:00:00.000Z"}]}')}}]);
